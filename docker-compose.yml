@@ -9,13 +9,13 @@ services:
   kafkaBroker1:
     image: 'bitnami/kafka:latest'
     ports:
-      - '9097:9097'
-      - '9099:9099'
+      - '9093:9093'
+      - '9094:9094'
     environment:
       - KAFKA_BROKER_ID=1
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
-      - KAFKA_CFG_LISTENERS=CLIENT://:9097,EXTERNAL://:9099
-      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafkaBroker1:9097,EXTERNAL://localhost:9099
+      - KAFKA_CFG_LISTENERS=CLIENT://:9093,EXTERNAL://:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafkaBroker1:9093,EXTERNAL://localhost:9094
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
@@ -25,34 +25,42 @@ services:
   kafkaBroker2:
     image: 'bitnami/kafka:latest'
     ports:
-      - '9078:9078'
+      - '9095:9095'
+      #- '9096:9096'
     environment:
       - KAFKA_BROKER_ID=2
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9078
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafkaBroker2:9078
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9095,EXTERNAL://:9096
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafkaBroker2:9095,EXTERNAL://localhost:9096
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on:
       - zookeeper
+      - kafkaBroker1
   
   kafkaBroker3:
     image: 'bitnami/kafka:latest'
     ports:
-      - '9079:9079'
+      - '9085:9085'
+      #- '9086:9086'
     environment:
       - KAFKA_BROKER_ID=3
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9079
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafkaBroker3:9079
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9085,EXTERNAL://:9086
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafkaBroker3:9085,EXTERNAL://localhost:9086
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on:
       - zookeeper
-  api: 
-    build: 
-        context: ./api-kafka-admin-with-python
-        dockerfile: Dockerfile
-    restart: always
-    depends_on: 
-        - kafkaBroker3
-    ports: 
-        - "80:80"
+      - kafkaBroker2
+  # api: 
+  #   build: 
+  #       context: ./api-kafka-admin-with-python
+  #       dockerfile: Dockerfile
+  #   restart: always
+  #   depends_on: 
+  #       - kafkaBroker3
+  #   ports: 
+  #       - "80:80"
