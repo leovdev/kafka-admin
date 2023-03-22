@@ -1,0 +1,3 @@
+[submodule "api-kafka-admin-with-python"]
+	path = api-kafka-admin-with-python
+	url = https://github.com/leovdev/api-kafka-admin-with-python

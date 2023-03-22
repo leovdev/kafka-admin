@@ -46,7 +46,7 @@ services:
       - zookeeper
   api: 
     build: 
-        context: ./topics-api
+        context: ./api-kafka-admin-with-python
         dockerfile: Dockerfile
     restart: always
     depends_on: 
