@@ -6,6 +6,16 @@ services:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 8081:8081
+
   kafkaBroker1:
     image: 'bitnami/kafka:latest'
     ports:
@@ -50,7 +60,7 @@ services:
   kafkaBroker3:
     image: 'bitnami/kafka:latest'
     ports:
-      - '9085:9085'
+      # - '9085:9085'
       - '9086:9086'
     environment:
       - KAFKA_BROKER_ID=3
