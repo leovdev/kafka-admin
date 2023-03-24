@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/venv,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=venv,python
 bbog-sd-insurance-select-mngr/
+api-kafka-admin-with-python/
 .DS_Store
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -116,7 +117,7 @@ ipython_config.py
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
-
+.vscode/
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
@@ -125,7 +126,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
