@@ -2,3 +2,6 @@
 	path = api-kafka-admin-with-python
 	url = https://github.com/leovdev/api-kafka-admin-with-python
 	ignore = dirty
+[submodule "kafka-generic-consumer-offset-setter"]
+	path = kafka-generic-consumer-offset-setter
+	url = https://github.com/leovdev/kafka-generic-consumer-offset-setter.git
